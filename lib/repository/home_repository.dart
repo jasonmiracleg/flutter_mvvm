@@ -21,7 +21,7 @@ class HomeRepository {
     }
   }
 
-    Future<List<City>> fetchCityList(var provId) async {
+  Future<List<City>> fetchCityList(var provId) async {
     try {
       dynamic response = await _apiServices.getApiResponse('/starter/city');
       List<City> result = [];
@@ -33,8 +33,8 @@ class HomeRepository {
       }
 
       List<City> selectedCities = [];
-      for(var c in result){
-        if(c.provinceId == provId){
+      for (var c in result) {
+        if (c.provinceId == provId) {
           selectedCities.add(c);
         }
       }
