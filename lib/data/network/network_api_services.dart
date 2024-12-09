@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -28,8 +30,26 @@ class NetworkApiServices implements BaseApiServices {
   }
 
   @override
-  Future postApiResponse(String url, data) {
-    throw UnimplementedError();
+  Future postApiResponse(String endpoint, dynamic data) async {
+    dynamic responseJson;
+    try {
+      final response = await http.post(
+        Uri.https(Const.baseUrl, Const.apiPath + endpoint),
+        headers: {
+          'key' : Const.apiKey,
+          'content-type' : 'application/x-www-form-urlencoded',
+        },
+        body: data
+      );
+      print("URL: ${Uri.https(Const.baseUrl, Const.apiPath + endpoint)}");
+      print("Data: $data");
+      print("Response status: ${response.statusCode}");
+      print("Response body: ${response.body}");
+      responseJson = returnResponse(response);
+    } on SocketException {
+      throw NoInternetException('');
+    }
+    return responseJson;
   }
 
   dynamic returnResponse(http.Response response) {
