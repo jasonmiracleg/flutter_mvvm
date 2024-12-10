@@ -1,5 +1,7 @@
+import 'package:flutter_mvvm/data/app_exception.dart';
 import 'package:flutter_mvvm/data/network/network_api_services.dart';
 import 'package:flutter_mvvm/model/city.dart';
+import 'package:flutter_mvvm/model/costs/courier.dart';
 import 'package:flutter_mvvm/model/model.dart';
 
 class HomeRepository {
@@ -42,6 +44,33 @@ class HomeRepository {
       return selectedCities;
     } catch (e) {
       throw e;
+    }
+  }
+
+  Future<Courier> calculateShippingCost({
+    required String origin,
+    required String destination,
+    required int weight,
+    required String courier,
+  }) async {
+    try {
+      final body = {
+        'origin': origin,
+        'destination' : destination,
+        'weight' : weight.toString(),
+        'courier' : courier,
+      };
+
+      dynamic response = await _apiServices.postApiResponse('/cost', body);
+
+      if (response['rajaongkir']['status']['code'] == 200) {
+        return Courier.fromJson(response['rajaongkir']['results'][0]);
+      }
+      throw FetchDataException('Something went wrong');
+    } catch (e) {
+      // ignore: avoid_print
+      print("Error calculating cost : $e");
+      rethrow;
     }
   }
 }
