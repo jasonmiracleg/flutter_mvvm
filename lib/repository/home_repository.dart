@@ -56,12 +56,13 @@ class HomeRepository {
     try {
       final body = {
         'origin': origin,
-        'destination' : destination,
-        'weight' : weight.toString(),
-        'courier' : courier,
+        'destination': destination,
+        'weight': weight.toString(),
+        'courier': courier,
       };
 
-      dynamic response = await _apiServices.postApiResponse('/cost', body);
+      dynamic response =
+          await _apiServices.postApiResponse('/starter/cost', body);
 
       if (response['rajaongkir']['status']['code'] == 200) {
         return Courier.fromJson(response['rajaongkir']['results'][0]);

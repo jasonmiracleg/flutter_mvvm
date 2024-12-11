@@ -9,6 +9,7 @@ import 'package:flutter_mvvm/repository/home_repository.dart';
 
 class HomeViewmodel with ChangeNotifier {
   final _homeRepo = HomeRepository();
+  bool isLoading = false;
 
   ApiResponse<List<Province>> provinceList = ApiResponse.loading();
   ApiResponse<List<City>> originCityList = ApiResponse.completed([]);
@@ -51,7 +52,7 @@ class HomeViewmodel with ChangeNotifier {
     });
   }
 
-  Future<void> getDestintCityList(String provId) async {
+  Future<void> getDestinationCityList(String provId) async {
     setDestinationCityList(ApiResponse.loading());
     _homeRepo.fetchCityList(provId).then((value) {
       setDestinationCityList(ApiResponse.completed(value));

@@ -34,13 +34,13 @@ class NetworkApiServices implements BaseApiServices {
     dynamic responseJson;
     try {
       final response =
-          await http.post(Uri.https(Const.baseUrl, Const.apiPath + endpoint),
+          await http.post(Uri.https(Const.baseUrl, endpoint),
               headers: {
                 'key': Const.apiKey,
                 'content-type': 'application/x-www-form-urlencoded',
               },
               body: data);
-      print("URL: ${Uri.https(Const.baseUrl, Const.apiPath + endpoint)}");
+      print("URL: ${Uri.https(Const.baseUrl, endpoint)}");
       print("Data: $data");
       print("Response status: ${response.statusCode}");
       print("Response body: ${response.body}");
