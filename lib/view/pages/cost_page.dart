@@ -326,103 +326,96 @@ class _CostPageState extends State<CostPage> {
                   if (courier!.costs != null) {
                     return ListView(
                       children: [
-                        ...courier.costs?.map((costItem) {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                      height:
-                                          8), // Add spacing after the courier name
-                                  ...courier.costs?.map((costItem) {
-                                        return Card(
-                                          margin: const EdgeInsets.symmetric(
-                                              vertical: 8, horizontal: 8),
-                                          elevation: 4,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(12.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  costItem.service ??
-                                                      "Unknown Service",
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.blueAccent,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 4),
-                                                Text(
-                                                  costItem.description ??
-                                                      "No description",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontStyle: FontStyle.italic,
-                                                    color: Colors.grey[700],
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 8),
-                                                ...costItem.cost?.map((cost) {
-                                                      return Column(
-                                                        children: [
-                                                          ListTile(
-                                                            contentPadding:
-                                                                EdgeInsets.zero,
-                                                            leading: const Icon(
-                                                              Icons
-                                                                  .monetization_on,
-                                                              color:
-                                                                  Colors.green,
-                                                            ),
-                                                            title: Text(
-                                                              cost.note ??
-                                                                  "No note",
-                                                              style: const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                            subtitle: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Cost: ${cost.value?.toString() ?? "0"} IDR",
-                                                                  style: const TextStyle(
-                                                                      color: Colors
-                                                                          .black87),
-                                                                ),
-                                                                Text(
-                                                                  "ETD: ${cost.etd ?? "N/A"} days",
-                                                                  style: const TextStyle(
-                                                                      color: Colors
-                                                                          .black54),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          const Divider(), // Separate multiple costs for the same service
-                                                        ],
-                                                      );
-                                                    }).toList() ??
-                                                    [],
-                                              ],
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                                height:
+                                    8), // Add spacing after the courier name
+                            ...courier.costs?.map((costItem) {
+                                  return Card(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 8),
+                                    elevation: 4,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            costItem.service ??
+                                                "Unknown Service",
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.blueAccent,
                                             ),
                                           ),
-                                        );
-                                      }).toList() ??
-                                      [],
-                                ],
-                              );
-                            }).toList() ??
-                            [],
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            costItem.description ??
+                                                "No description",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.grey[700],
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          ...costItem.cost?.map((cost) {
+                                                return Column(
+                                                  children: [
+                                                    ListTile(
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      leading: const Icon(
+                                                        Icons.monetization_on,
+                                                        color: Colors.green,
+                                                      ),
+                                                      title: Text(
+                                                        cost.note ?? "No note",
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                      subtitle: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            "Cost: ${cost.value?.toString() ?? "0"} IDR",
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .black87),
+                                                          ),
+                                                          Text(
+                                                            "ETD: ${cost.etd ?? "N/A"} days",
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .black54),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    const Divider(), // Separate multiple costs for the same service
+                                                  ],
+                                                );
+                                              }).toList() ??
+                                              [],
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }).toList() ??
+                                [],
+                          ],
+                        )
                       ],
                     );
                   } else {
